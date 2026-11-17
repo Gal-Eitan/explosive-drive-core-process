@@ -95,27 +95,27 @@ public class CarController : MonoBehaviour
     }
 
     private void ApplySteering()
-{
-    float forwardSpeed =
-        Vector2.Dot(rb.linearVelocity, Forward);
+    {
+        float forwardSpeed =
+            Vector2.Dot(rb.linearVelocity, Forward);
 
-    if (Mathf.Abs(forwardSpeed) < minSteeringSpeed)
-        return;
+        if (Mathf.Abs(forwardSpeed) < minSteeringSpeed)
+            return;
 
-    float reverseMultiplier = Mathf.Sign(forwardSpeed);
+        float reverseMultiplier = Mathf.Sign(forwardSpeed);
 
-    rb.AddTorque(
-        steering * reverseMultiplier * steeringTorque,
-        ForceMode2D.Force
-    );
+        rb.AddTorque(
+            steering * reverseMultiplier * steeringTorque,
+            ForceMode2D.Force
+        );
 
-    // Limit rotation speed.
-    rb.angularVelocity = Mathf.Clamp(
-        rb.angularVelocity,
-        -maxAngularSpeed,
-        maxAngularSpeed
-    );
-}
+        // Limit rotation speed.
+        rb.angularVelocity = Mathf.Clamp(
+            rb.angularVelocity,
+            -maxAngularSpeed,
+            maxAngularSpeed
+        );
+    }
 
     private void ApplyLateralFriction()
     {

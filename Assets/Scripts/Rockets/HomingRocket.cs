@@ -29,7 +29,7 @@ public class HomingRocket : MonoBehaviour
         explosion = GetComponent<RocketExplosion>();
     }
 
-    
+
 
     private IEnumerator RocketSequence()
     {
@@ -134,31 +134,31 @@ public class HomingRocket : MonoBehaviour
         Destroy(gameObject);
     }
     public void SetTarget(Transform target)
-{
-    if (initialized)
-        return;
-
-    player = target;
-
-    if (player == null ||
-        targetIndicatorPrefab == null ||
-        rocketVisual == null)
     {
-        Debug.LogError(
-            $"HomingRocket {name} missing references! " +
-            $"Player: {player}, " +
-            $"Indicator: {targetIndicatorPrefab}, " +
-            $"Visual: {rocketVisual}"
-        );
+        if (initialized)
+            return;
 
-        Destroy(gameObject);
-        return;
+        player = target;
+
+        if (player == null ||
+            targetIndicatorPrefab == null ||
+            rocketVisual == null)
+        {
+            Debug.LogError(
+                $"HomingRocket {name} missing references! " +
+                $"Player: {player}, " +
+                $"Indicator: {targetIndicatorPrefab}, " +
+                $"Visual: {rocketVisual}"
+            );
+
+            Destroy(gameObject);
+            return;
+        }
+
+        initialized = true;
+
+        Debug.Log($"HomingRocket initialized with player: {player.name}");
+
+        StartCoroutine(RocketSequence());
     }
-
-    initialized = true;
-
-    Debug.Log($"HomingRocket initialized with player: {player.name}");
-
-    StartCoroutine(RocketSequence());
-}
 }
